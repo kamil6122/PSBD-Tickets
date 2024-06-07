@@ -14,6 +14,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "pociagi")
+@ToString
 public class Pociag {
     @Id
     private String numer_pociagu;

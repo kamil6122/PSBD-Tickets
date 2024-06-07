@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @Table(name = "postoje")
+@Entity
+@ToString
 public class Postoj {
 
     @Id
@@ -25,9 +27,11 @@ public class Postoj {
     private Integer dystans;
 
     @NonNull
+    @ManyToOne
     private Stacja stacja;
 
     @NonNull
+    @ManyToOne
     private Kurs kurs;
 
     @NonNull

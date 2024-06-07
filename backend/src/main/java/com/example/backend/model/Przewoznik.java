@@ -1,10 +1,7 @@
 package com.example.backend.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -14,9 +11,11 @@ import lombok.*;
 @Setter
 @Builder
 @Table(name = "przewoznicy")
+@Entity
+@ToString
 public class Przewoznik {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NonNull

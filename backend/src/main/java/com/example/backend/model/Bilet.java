@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @Table(name = "bilety")
+@Entity
+@ToString
 public class Bilet {
 
     @Id
@@ -25,6 +27,9 @@ public class Bilet {
     private BigDecimal cena;
 
     @NonNull
+    private String znizka;
+
+    @NonNull
     private Integer wagon;
 
     @NonNull
@@ -34,12 +39,13 @@ public class Bilet {
     private LocalDateTime data_godzina_waznosci;
 
     @CreationTimestamp
-    @NonNull
     private LocalDateTime data_godzina_zakupu;
 
     @NonNull
+    @ManyToOne
     private Postoj postoj_początkowy;
 
     @NonNull
+    @ManyToOne
     private Postoj postoj_koncowy;
 }

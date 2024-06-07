@@ -12,6 +12,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "stacje")
+@ToString
 public class Stacja {
 
     @Id

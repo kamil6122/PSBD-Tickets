@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "417f6fdc-a093-4ca3-abfc-c27e28e1f23c",
+		"name": "psbd5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34632865"
+	},
+	"item": [
+		{
+			"name": "get all bilets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/bilety",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bilety"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get specific bilet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/bilety/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bilety",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

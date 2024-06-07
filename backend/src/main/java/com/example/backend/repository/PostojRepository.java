@@ -1,7 +1,6 @@
 package com.example.backend.repository;
 
 import com.example.backend.model.Postoj;
-import jdk.jfr.Name;
 import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
