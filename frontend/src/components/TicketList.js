@@ -1,65 +1,51 @@
-import {CircleHelp, Menu, Route, Ticket, TramFront} from "lucide-react";
-import {useQuery, QueryClient, QueryClientProvider, useQueryClient} from '@tanstack/react-query';
+import {useQuery} from '@tanstack/react-query';
 import { getAllTickets } from "../api/api";
-import axios from "axios";
-import {useEffect, useState} from "react";
+import {TicketInfoInList} from "./TicketInfoInList";
+import {Navbar} from "./Navbar";
+import { parseISO, isBefore } from 'date-fns';
+
 export const TicketList = () => {
-
-    // const [data, setData] = useState([]);
-    // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
-    //
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await axios.get('http://localhost:8080/api/bilety/'
-    //             //     , {
-    //             //         mode: "cors",
-    //             //     headers: {
-    //             //         'Content-Type': 'application/json'
-    //             //     },
-    //             //     credentials: "same-origin"
-    //             // }
-    //             );
-    //             setData(response.data);
-    //         } catch (error) {
-    //             setError(error.message);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-    //
-    //     fetchData();
-    // }, []);
-    //
-    // if (loading) return <div>Loading...</div>;
-    // if (error) return <div>Error: {error}</div>;
-    //
-    // console.log(data);
-
-    // const queryClient = useQueryClient();
-    // const queryClient = new QueryClient();
 
     const { data: tickets } = useQuery({
         queryKey: ['tickets'],
         queryFn: getAllTickets
     });
 
-    // if (tickets?.length === 0) {
-    //     return <div>Brak uczestników</div>;
-    // }
+    if (tickets?.length === 0) {
+        return <div>Brak biletów</div>;
+    }
 
-    console.log(tickets);
+    const currentDate = new Date();
+
+    let archiveTickets = [];
+    let currentTickets = [];
+
+    if (tickets) {
+        archiveTickets = tickets.filter(ticket => isBefore(parseISO(ticket.data_godzina_waznosci), currentDate));
+        currentTickets = tickets.filter(ticket => !isBefore(parseISO(ticket.data_godzina_waznosci), currentDate));
+    }
+    else {
+        return <div>Błąd przy pobieraniu biletów :(</div>
+    }
 
     return (
         <div className="flex flex-col gap-2">
-            {/*{tickets?.map((participant) => (*/}
-            {/*    <Ticket*/}
-            {/*        key={ticket.id}*/}
-            {/*        ticket={ticket}*/}
-            {/*    />*/}
-            {/*))}*/}
-            f
+            <Navbar/>
+            <div className="font-bold text-lg mx-auto">Twoje bilety: </div>
+            {currentTickets.length > 0 && <div className="mx-auto">Aktualne: </div>}
+            <div className="flex flex-col gap-4">{currentTickets.map((ticket) => (
+                <TicketInfoInList
+                    key={ticket.id}
+                    ticket={ticket}
+                />
+            ))}</div>
+            {archiveTickets.length > 0 && <div className="mx-auto">Archiwalne: </div>}
+            <div className="flex flex-col gap-4">{archiveTickets.map((ticket) => (
+                <TicketInfoInList
+                    key={ticket.id}
+                    ticket={ticket}
+                />
+            ))}</div>
         </div>
     );
 }

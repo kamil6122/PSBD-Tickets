@@ -1,15 +1,16 @@
 import './App.css';
-import { Navbar } from './components/Navbar.js'
-import { Ticket } from './components/Ticket.js'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {TicketList} from "./components/TicketList";
+import {TicketDetails} from "./components/TicketDetails";
 
 function App() {
   return (
-    <div className="App">
-        <Navbar/>
-        {/*<Ticket/>*/}
-        <TicketList/>
-    </div>
+      <BrowserRouter>
+          <Routes>
+              <Route path="/tickets" element={<TicketList/>} />
+              <Route path="/ticket/:id" element={<TicketDetails/>} />
+          </Routes>
+      </BrowserRouter>
   );
 }
 
