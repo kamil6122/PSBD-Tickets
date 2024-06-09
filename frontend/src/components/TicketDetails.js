@@ -85,6 +85,12 @@ export const TicketDetails = () => {
             {!isBefore(parseISO(ticket.data_godzina_waznosci), currentDate) &&
                 <div>Ważny do: <span className="text-green-500">{format(ticket.data_godzina_waznosci, "dd.MM.yyyy HH:mm")}</span></div>
             }
+            {ticket.wagon != null && ticket.miejsce != null &&
+                <div className="mt-4">
+                    <div>Zarezerwowane miejsce:</div>
+                    <div>wagon {ticket.wagon}, miejsce {ticket.miejsce}</div>
+                </div>
+            }
         </div>
 
         }
